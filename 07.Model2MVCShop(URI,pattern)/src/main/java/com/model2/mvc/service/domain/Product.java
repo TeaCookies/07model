@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
+import org.springframework.web.multipart.MultipartFile;
+
 
 public class Product {
 	
@@ -15,7 +17,16 @@ public class Product {
 	private int prodNo;
 	private Date regDate;
 	private String proTranCode;
+	private MultipartFile upload;
 	
+	public MultipartFile getUpload() {
+		return upload;
+	}
+
+	public void setUpload(MultipartFile upload) {
+		this.upload = upload;
+	}
+
 	public Product(){
 	}
 	

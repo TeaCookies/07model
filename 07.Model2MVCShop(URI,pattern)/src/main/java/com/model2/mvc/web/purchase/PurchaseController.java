@@ -62,7 +62,7 @@ public class PurchaseController {
 												Model model, 
 												HttpSession session) throws Exception {
 
-		System.out.println("/addPurchaseView.do");
+		System.out.println("/purchase/addPurchaseView : GET");
 
 		purchase.setPurchaseProd(productService.getProduct(prodNo));
 		purchase.setBuyer((User)session.getAttribute("user"));
@@ -81,7 +81,7 @@ public class PurchaseController {
 											@RequestParam("prodNo") int prodNo,
 											HttpSession session ) throws Exception {
 
-		System.out.println("/addPurchase.do");
+		System.out.println("/purchase/addPurchase : POST");
 		
 		purchase.setPurchaseProd(productService.getProduct(prodNo));
 		purchase.setBuyer((User)session.getAttribute("user"));
@@ -100,7 +100,7 @@ public class PurchaseController {
 	public String getPurchase( @RequestParam("tranNo") int tranNo , 
 																	Model model ) throws Exception {
 		
-		System.out.println("/getPurchase.do");
+		System.out.println("/purchase/getPurchase : GET");
 		
 		//Business Logic
 		Purchase purchase = purchaseService.getPurchase(tranNo);
@@ -118,7 +118,7 @@ public class PurchaseController {
 	public String updatePurchaseView( @RequestParam("tranNo") int tranNo , 
 																			Model model ) throws Exception{
 
-		System.out.println("/updatePurchaseView.do");
+		System.out.println("/purchase/updatePurchaseView : GET");
 		//Business Logic
 		Purchase purchase = purchaseService.getPurchase(tranNo);
 		// Model °ú View ¿¬°á
@@ -134,7 +134,7 @@ public class PurchaseController {
 	@RequestMapping( value="updatePurchase", method=RequestMethod.POST)
 	public String updatePurchase( @ModelAttribute("purchase") Purchase purchase , Model model) throws Exception{
 
-		System.out.println("/updatePurchase.do");
+		System.out.println("/purchase/updatePurchase : POST");
 		//Business Logic
 		
 		purchaseService.updatePurchase(purchase);
@@ -154,7 +154,7 @@ public class PurchaseController {
 												@RequestParam("tranCode") String tranCode ,
 												Model model) throws Exception{
 
-		System.out.println("/updateTranCode.do");
+		System.out.println("/purchase/updateTranCode : GET");
 		
 		Product product = productService.getProduct(prodNo);
 		purchase = purchaseService.getPurchase2(prodNo);
@@ -188,7 +188,7 @@ public class PurchaseController {
 															Model model ,
 															HttpSession session) throws Exception{
 		
-		System.out.println("/listPurchase.do");
+		System.out.println("/purchase/listPurchase : GET / POST");
 		
 		if(search.getCurrentPage() ==0 ){
 			search.setCurrentPage(1);

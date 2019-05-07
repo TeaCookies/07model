@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,14 +53,11 @@ public class ProductController {
 	
 	//@RequestMapping("/addProductView.do")
 	@RequestMapping( value="addProductView", method=RequestMethod.GET )
-	public ModelAndView addProductView() throws Exception {
+	public String addProductView() throws Exception {
 
-		System.out.println("/product/addProductView : POST");
+		System.out.println("/product/addProductView : GET");
 		
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("/product/addProductView.jsp");
-		
-		return modelAndView;
+		return "forward:/product/addProductView.jsp";
 	}
 	
 
@@ -70,6 +68,7 @@ public class ProductController {
 	public ModelAndView addUser( @ModelAttribute("product") Product product ) throws Exception {
 
 		System.out.println("/product/addProduct : POST");
+
 		//Business Logic
 		productService.addProduct(product);
 		
@@ -80,11 +79,14 @@ public class ProductController {
 	}
 	
 	
+	
+	
 	//@RequestMapping("/getProduct.do")
 	@RequestMapping( value="getProduct", method=RequestMethod.GET)
-	public ModelAndView getProduct( @RequestParam("prodNo") int prodNo , 
+	public String getProduct( @RequestParam("prodNo") int prodNo , 
 								@RequestParam("menu") String menu,
 								@CookieValue(value="history", required=false)  Cookie cookie ,
+								Model model,
 								HttpServletResponse response) throws Exception {
 		
 		System.out.println("/product/getProduct : GET");
@@ -92,26 +94,24 @@ public class ProductController {
 		//Business Logic
 		Product product = productService.getProduct(prodNo);
 		// Model °ú View ¿¬°á
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("product", product);	
+		model.addAttribute("product", product);	
 		
 		
 		if ( menu.equals("manage") ) {
-			modelAndView.setViewName("/product/updateProductView");
-			return modelAndView;
+			return "forward:/product/updateProductView";
 			
 		} else {
-			if (cookie != null) {
-				if (!(cookie.getValue().contains(Integer.toString(prodNo)))) {
+			if ( cookie != null ) {
+				if ( !( cookie.getValue().contains(Integer.toString(prodNo)) ) ) {
 					cookie.setValue(cookie.getValue()+","+Integer.toString(prodNo));
+					cookie.setPath("/");
 					response.addCookie(cookie);
 				}
 			}else {
 				response.addCookie(new Cookie("history", Integer.toString(prodNo)));
 			}
-			
-			modelAndView.setViewName("/product/getProduct.jsp");
-			return modelAndView;
+	
+		return "forward:/product/getProduct.jsp";
 		}
 	}
 	
@@ -123,7 +123,7 @@ public class ProductController {
 	@RequestMapping( value="updateProductView", method=RequestMethod.GET)
 	public ModelAndView updateProductView( @RequestParam("prodNo") int prodNo ) throws Exception{
 
-		System.out.println("/product/updateProductView : POST");
+		System.out.println("/product/updateProductView : GET");
 		//Business Logic
 		Product product = productService.getProduct(prodNo);
 
@@ -142,7 +142,7 @@ public class ProductController {
 	@RequestMapping( value="updateProduct" , method=RequestMethod.POST)
 	public ModelAndView updateProduct( @ModelAttribute("product") Product product) throws Exception{
 
-		System.out.println("/product/updateProduct : GET");
+		System.out.println("/product/updateProduct : POST");
 		//Business Logic
 		productService.updateProduct(product);
 		product = productService.getProduct(product.getProdNo());
