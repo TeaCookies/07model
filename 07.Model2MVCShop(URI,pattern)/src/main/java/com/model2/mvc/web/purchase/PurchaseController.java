@@ -163,7 +163,9 @@ public class PurchaseController {
 			product.setProTranCode("2");
 		} else if (tranCode.trim().equals("2")) {
 			product.setProTranCode("3");
-		}	
+		} else if (tranCode.trim().equals("3")) {
+			product.setProTranCode("0");
+		}		
 		
 		purchase.setTranCode(product.getProTranCode());
 		
@@ -208,6 +210,9 @@ public class PurchaseController {
 		
 		return "forward:/purchase/listPurchase.jsp";
 	}
+	
+	
+	
 	
 	
 	

@@ -72,7 +72,7 @@
 					align="absmiddle" />
 				</td>
 				<td bgcolor="D6D6D6" width="1"></td>
-				<td class="ct_write01"><img src="http://placehold.it/300X300" />
+				<td class="ct_write01"><img src="../images/uploadFiles/${product.fileName}" />
 				</td>
 			</tr>
 			<tr>
@@ -102,6 +102,7 @@
 				<td bgcolor="D6D6D6" width="1"></td>
 				<td class="ct_write01">${ product.price }</td>
 			</tr>
+			
 			<tr>
 				<td height="1" colspan="3" bgcolor="D6D6D6"></td>
 			</tr>
@@ -127,7 +128,7 @@
 						<tr>
 							
 							
-								<c:if test="${product.proTranCode eq null &&  param.menu eq 'search'}">
+								<c:if test="${(product.proTranCode eq null )&&  param.menu eq 'search'}">
 								
 									<td width="17" height="23"><img src="/images/ct_btnbg01.gif"
 										width="17" height="23" /></td>

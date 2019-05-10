@@ -26,6 +26,7 @@ public interface PurchaseDao {
 	//UPDATE tranCode
 	public void updateTranCode(Purchase purchase) throws Exception ;
 	
+	
 	// 게시판 Page 처리를 위한 전체Row(totalCount)  return
 	public int getTotalCount(String buyerId) throws Exception ;
 

@@ -47,15 +47,15 @@
 					</td>
 				</tr>
 				<tr>
-					<td class="ct_list_b" width="100">No</td>
+					<td class="ct_list_b" width="50">No</td>
 					<td class="ct_line02"></td>
-					<td class="ct_list_b" width="150">회원ID</td>
+					<td class="ct_list_b" width="150">구매날짜</td>
 					<td class="ct_line02"></td>
-					<td class="ct_list_b" width="150">회원명</td>
+					<td class="ct_list_b" width="150">상품명</td>
 					<td class="ct_line02"></td>
-					<td class="ct_list_b">전화번호</td>
+					<td class="ct_list_b" width="100">가격</td>
 					<td class="ct_line02"></td>
-					<td class="ct_list_b">배송현황</td>
+					<td class="ct_list_b">주문현황</td>
 					<td class="ct_line02"></td>
 					<td class="ct_list_b">정보수정</td>
 				</tr>
@@ -67,26 +67,25 @@
 				<c:forEach var="purchase" items="${list}">
 					<c:set var="i" value="${ i+1 }" />
 						<tr class="ct_list_pop">
-							<td align="center">
-								<a href="/purchase/getPurchase?tranNo=${purchase.tranNo}">${ i }</a></td>
+						<td align="center">${ i }</a></td>
 						<td></td>
-						<td align="left"><a href="/user/getUser?userId=${purchase.buyer.userId}"> ${purchase.buyer.userId}</a></td>
+						<td align="center"><a href="/purchase/getPurchase?tranNo=${purchase.tranNo}"> ${purchase.orderDate}</a></td>
 						<td></td>
-						<td align="left">${purchase.buyer.userName }</td>
+						<td align="center"><a href="/product/getProduct?prodNo=${ purchase.purchaseProd.prodNo}&menu=search"> ${purchase.purchaseProd.prodName }</a></td>
 						<td></td>
-						<td align="left"> ${purchase.buyer.phone}</td>
+						<td align="center"> ${purchase.purchaseProd.price }원</td>
 						<td></td>
-						<td align="left">
+						<td align="center">
 						
 						<c:choose>
 							<c:when test="${purchase.tranCode eq '1' }">
 								구매 완료 
 							</c:when>
 							<c:when test="${purchase.tranCode eq '2' }">
-								배송 중
+								배송 중 
 							</c:when>
 							<c:when test="${purchase.tranCode eq '3' }"> 
-								배송 완료 
+								배송 완료
 							</c:when>
 							<c:otherwise>
 								????? :: ${purchase.tranCode} 
@@ -98,16 +97,16 @@
 						<td align="left">
 						
 						<c:choose>
+							<c:when test="${ purchase.tranCode eq '1'  }">
+								배송 준비 중
+							</c:when>	
 							<c:when test="${purchase.tranCode eq '2' }">
 								<a href="/purchase/updateTranCode?prodNo=${purchase.purchaseProd.prodNo}
 										&tranCode=${purchase.tranCode}">수취 확인</a> 
 							</c:when>
 							<c:when test="${ purchase.tranCode eq '3'  }">
-								배송이 완료되었습니다. 
-							</c:when>
-							<c:when test="${ purchase.tranCode eq '1'  }">
-								배송 준비 중 
-							</c:when>				
+								배송 완료
+							</c:when>		
 						</c:choose>
 					</td>
 					<td></td>

@@ -19,6 +19,7 @@ public class Product {
 	private String proTranCode;
 	private MultipartFile upload;
 	
+
 	public MultipartFile getUpload() {
 		return upload;
 	}

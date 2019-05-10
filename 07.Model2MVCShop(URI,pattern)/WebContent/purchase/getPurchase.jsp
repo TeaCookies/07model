@@ -142,7 +142,8 @@
 		<td align="right">
 			<table border="0" cellspacing="0" cellpadding="0">
 				<tr>
-				<c:if test="${purchase.tranCode eq '1' }">
+				<c:choose>
+				<c:when test="${purchase.tranCode eq '1' }">
 					<td width="17" height="23">
 						<img src="/images/ct_btnbg01.gif" width="17" height="23"/>
 					</td>
@@ -153,10 +154,11 @@
 					<td width="14" height="23">
 						<img src="/images/ct_btnbg03.gif" width="14" height="23"/>
 					</td>
-				</c:if>
-				<c:if test="${purchase.tranCode ne '1' }">
+				</c:when>
+				<c:when test="${purchase.tranCode ne '1'}">
 					발송 이후에는 구매 정보를 수정할 수 없습니다.
-				</c:if>
+				</c:when>
+				</c:choose>
 					<td width="10"></td>
 					<td width="17" height="23">
 						<img src="/images/ct_btnbg01.gif" width="17" height="23"/>

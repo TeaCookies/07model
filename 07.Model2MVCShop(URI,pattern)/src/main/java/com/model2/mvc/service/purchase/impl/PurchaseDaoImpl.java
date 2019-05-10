@@ -86,4 +86,5 @@ public class PurchaseDaoImpl implements PurchaseDao {
 		return sqlSession.selectOne("PurchaseMapper.getTotalCount", buyerId);
 	}
 
+
 }
