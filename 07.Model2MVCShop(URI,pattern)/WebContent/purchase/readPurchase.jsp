@@ -9,7 +9,7 @@
 
 <body>
 
-<form name="updatePurchase" action="/purchase/updatePurchaseView?tranNo=${purchase.tranNo}" method="post">
+<form name="updatePurchase" action="/purchase/updatePurchase?tranNo=${purchase.tranNo}" method="post">
 <input type="hidden" name="tranCode" value="${purchase.tranCode}" />
 다음과 같이 구매가 되었습니다.
 

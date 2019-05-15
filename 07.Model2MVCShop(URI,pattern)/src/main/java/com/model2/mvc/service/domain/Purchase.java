@@ -3,7 +3,6 @@ package com.model2.mvc.service.domain;
 import java.sql.Date;
 
 import com.model2.mvc.service.domain.Product;
-import com.model2.mvc.service.domain.User;
 
 
 public class Purchase {

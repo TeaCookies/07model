@@ -83,14 +83,8 @@
 	<tr>
 		<td width="104" class="ct_write">상품이미지</td>
 		<td bgcolor="D6D6D6" width="1"></td>
-		<td class="ct_write01">${product.fileName}</td>
-		<!--  <td class="ct_write01">
-			<table border="0" cellspacing="0" cellpadding="0">
-				<tr>
-					<td height="26"></td>
-				</tr>
-			</table>
-		</td>-->
+		<td class="ct_write01"><img src="../images/uploadFiles/${product.fileName}" /></td>
+
 	</tr>
 	<tr>
 		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
@@ -117,7 +111,7 @@
 						<img src="/images/ct_btnbg01.gif" width="17" height="23"/>
 					</td>
 					<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top:3px;">
-						<a href="/product/addProductView">추가등록</a>
+						<a href="/product/addProduct">추가등록</a>
 					</td>
 					<td width="14" height="23">
 						<img src="/images/ct_btnbg03.gif" width="14" height="23"/>
