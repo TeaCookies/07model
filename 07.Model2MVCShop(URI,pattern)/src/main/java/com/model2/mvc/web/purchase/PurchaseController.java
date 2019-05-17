@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -57,13 +58,13 @@ public class PurchaseController {
 	//get
 	//@RequestMapping("/addPurchaseView.do")
 	@RequestMapping( value="addPurchase", method=RequestMethod.GET)
-	public String addPurchase(@ModelAttribute("purchase") Purchase purchase, 
-												@RequestParam("prodNo") int prodNo,
-												Model model, 
-												HttpSession session) throws Exception {
+	public String addPurchase( @RequestParam("prodNo") int prodNo,
+								Model model, 
+								HttpSession session) throws Exception {
 
 		System.out.println("/purchase/addPurchase : GET");
-
+		
+		Purchase purchase = new Purchase();
 		purchase.setPurchaseProd(productService.getProduct(prodNo));
 		purchase.setBuyer((User)session.getAttribute("user"));
 		
@@ -78,12 +79,13 @@ public class PurchaseController {
 	//@RequestMapping("/addPurchase.do")
 	@RequestMapping( value="addPurchase", method=RequestMethod.POST)
 	public String addPurchase( @ModelAttribute("purchase") Purchase purchase, 
-											@RequestParam("prodNo") int prodNo,
-											HttpSession session ) throws Exception {
+										//	@RequestParam("prodNo") int prodNo,
+											HttpServletRequest request, HttpSession session ) throws Exception {
 
 		System.out.println("/purchase/addPurchase : POST");
+		System.out.println("»Æ¿Œ @@@@@@@            "+request.getParameter("prodNo"));
 		
-		purchase.setPurchaseProd(productService.getProduct(prodNo));
+		purchase.setPurchaseProd(productService.getProduct(Integer.parseInt(request.getParameter("prodNo"))));
 		purchase.setBuyer((User)session.getAttribute("user"));
 		
 		//Business Logic
